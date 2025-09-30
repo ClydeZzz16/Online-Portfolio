@@ -203,6 +203,7 @@
         /* Sections */
         section {
             padding: 5rem 5%;
+            scroll-margin-top: 80px; /* Fix for navigation offset */
         }
 
         .section-title {
@@ -305,9 +306,34 @@
 
         .project-image {
             height: 200px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
 
         .project-content {
@@ -576,7 +602,12 @@
         /* Resume Section */
         .resume-section {
             text-align: center;
-            padding: 3rem 5%;
+            padding: 5rem 5%;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .resume-download {
@@ -682,6 +713,7 @@
                     <div class="skill">C#</div>
                     <div class="skill">JavaScript</div>
                     <div class="skill">MySQL</div>
+                    <div class="skill">TypeScript</div>
                 </div>
             </div>
             <div class="about-image">
@@ -694,7 +726,7 @@
     <section id="projects">
         <h2 class="section-title">My Projects</h2>
         <div class="projects-grid" id="projects-container">
-            <!-- Projects will be loaded from GitHub API -->
+            <!-- Projects will be loaded from JavaScript -->
             <div class="spinner"></div>
         </div>
     </section>
@@ -806,15 +838,56 @@
     </footer>
 
     <script>
+        // Project data with images and live demo links
+        const projectsData = [
+            {
+                name: 'egmilan_tictactoe_lab',
+                title: 'Tic Tac Toe Game',
+                description: 'Java Tic Tac Toe game with AI opponent featuring three difficulty levels. Built with Java Swing.',
+                language: 'TypeScript',
+                githubUrl: 'https://github.com/ClydeZzz16/egmilan_tictactoe_lab',
+                demoUrl: 'https://egmilan-tictactoe-lab.vercel.app/', // Replace with your actual Vercel URL
+                imageUrl: 'Screenshot 2025-09-30 205104.png',
+                hasDemo: true
+            },
+            {
+                name: 'EduAdventure',
+                title: 'EduAdventure Game',
+                description: 'Educational adventure game designed to make learning fun and interactive for students.',
+                language: 'TypeScript',
+                githubUrl: 'https://github.com/ClydeZzz16/EduAdventure',
+                demoUrl: 'https://edu-adventure.vercel.app', // Replace with your actual Vercel URL
+                imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+                hasDemo: true
+            },
+            {
+                name: 'Windows_Paint',
+                title: 'Windows Paint App',
+                description: 'Paint application for Windows with various drawing tools and features similar to MS Paint.',
+                language: 'C#',
+                githubUrl: 'https://github.com/ClydeZzz16/Windows_Paint',
+                demoUrl: null,
+                imageUrl: 'Screenshot 2025-09-30 205359.png',
+                hasDemo: false
+            },
+            {
+                name: 'Windows-Calculator',
+                title: 'Windows Calculator',
+                description: 'Modern calculator application with advanced mathematical operations and user-friendly interface.',
+                language: 'C#',
+                githubUrl: 'https://github.com/ClydeZzz16/Windows-Calculator',
+                demoUrl: null,
+                imageUrl: 'https://images.unsplash.com/photo-1587145820266-a5951ee6f620?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+                hasDemo: false
+            }
+        ];
+
         // GitHub API Integration
         document.addEventListener('DOMContentLoaded', function() {
             const username = 'ClydeZzz16';
-            const selectedProjects = [
-                'egmilan_tictactoe_lab',
-                'EduAdventure',
-                'Windows_Paint',
-                'Windows-Calculator'
-            ];
+            
+            // Display projects immediately
+            updateProjects(projectsData);
             
             // Fetch GitHub user data
             fetch(`https://api.github.com/users/${username}`)
@@ -832,29 +905,15 @@
                     });
                 });
             
-            // Fetch GitHub repositories
+            // Fetch GitHub repositories for language stats
             fetch(`https://api.github.com/users/${username}/repos`)
                 .then(response => response.json())
                 .then(repos => {
-                    // Filter to only include selected projects
-                    const filteredRepos = repos.filter(repo => 
-                        selectedProjects.includes(repo.name)
-                    );
-                    updateProjects(filteredRepos);
-                    
                     // Calculate language statistics
                     calculateLanguageStats(repos);
                 })
                 .catch(error => {
                     console.error('Error fetching GitHub repositories:', error);
-                    // Fallback projects if API fails
-                    updateProjects([
-                        { name: 'egmilan_tictactoe_lab', description: 'Java Tic Tac Toe game with AI opponent', html_url: 'https://github.com/ClydeZzz16/egmilan_tictactoe_lab', language: 'Java' },
-                        { name: 'EduAdventure', description: 'Educational adventure game', html_url: 'https://github.com/ClydeZzz16/EduAdventure', language: 'C#' },
-                        { name: 'Windows_Paint', description: 'Paint application for Windows', html_url: 'https://github.com/ClydeZzz16/Windows_Paint', language: 'C#' },
-                        { name: 'Windows-Calculator', description: 'Modern calculator application', html_url: 'https://github.com/ClydeZzz16/Windows-Calculator', language: 'C#' }
-                    ]);
-                    
                     // Fallback language stats
                     updateLanguageStats({
                         'Java': 35,
@@ -865,7 +924,7 @@
                     });
                 });
             
-            // Generate GitHub contributions grid (simulated)
+            // Generate GitHub contributions grid (simulated based on typical student activity)
             generateContributionsGrid();
             
             // Resume download functionality
@@ -874,13 +933,20 @@
                 console.log('Resume download initiated');
             });
             
-            // Smooth scrolling for navigation links
+            // Smooth scrolling for navigation links with offset for fixed navbar
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const offsetTop = targetElement.offsetTop - 80; // Adjust for navbar height
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
                 });
             });
             
@@ -923,7 +989,7 @@
                     </div>
                     <div class="stat-card">
                         <i class="fas fa-code"></i>
-                        <h3>${selectedProjects.length}</h3>
+                        <h3>${projectsData.length}</h3>
                         <p>Featured Projects</p>
                     </div>
                 `;
@@ -994,36 +1060,35 @@
                 }, 500);
             }
             
-            function updateProjects(repos) {
+            function updateProjects(projects) {
                 const projectsContainer = document.getElementById('projects-container');
                 
-                if (repos.length === 0) {
+                if (projects.length === 0) {
                     projectsContainer.innerHTML = '<p>No featured projects found.</p>';
                     return;
                 }
                 
                 let projectsHTML = '';
                 
-                // Create project descriptions based on project names
-                const projectDescriptions = {
-                    'egmilan_tictactoe_lab': 'Java Tic Tac Toe game with AI opponent featuring three difficulty levels. Built with Java Swing.',
-                    'EduAdventure': 'Educational adventure game designed to make learning fun and interactive.',
-                    'Windows_Paint': 'Paint application for Windows with various drawing tools and features.',
-                    'Windows-Calculator': 'Modern calculator application with advanced mathematical operations.'
-                };
-                
-                repos.forEach(repo => {
+                projects.forEach(project => {
                     projectsHTML += `
                         <div class="project-card">
-                            <div class="project-image"></div>
+                            <div class="project-image">
+                                ${project.imageUrl ? 
+                                    `<img src="${project.imageUrl}" alt="${project.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                     <div class="project-image-placeholder" style="display: none;">${project.title}</div>` :
+                                    `<div class="project-image-placeholder">${project.title}</div>`
+                                }
+                            </div>
                             <div class="project-content">
-                                <h3>${repo.name}</h3>
-                                <p>${projectDescriptions[repo.name] || repo.description || 'No description available'}</p>
+                                <h3>${project.title}</h3>
+                                <p>${project.description}</p>
                                 <div class="project-tags">
-                                    <div class="project-tag">${repo.language || 'Various'}</div>
+                                    <div class="project-tag">${project.language || 'Various'}</div>
                                 </div>
                                 <div class="project-links">
-                                    <a href="${repo.html_url}" target="_blank"><i class="fab fa-github"></i> Code</a>
+                                    <a href="${project.githubUrl}" target="_blank"><i class="fab fa-github"></i> Code</a>
+                                    ${project.hasDemo ? `<a href="${project.demoUrl}" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>` : ''}
                                 </div>
                             </div>
                         </div>
@@ -1037,22 +1102,31 @@
                 const grid = document.getElementById('contributions-grid');
                 const totalCells = 364; // 52 weeks * 7 days - a few days
                 
-                // More realistic contribution pattern
+                // More realistic contribution pattern for a CS student
                 for (let i = 0; i < totalCells; i++) {
                     const cell = document.createElement('div');
                     
-                    // Create a more realistic pattern with higher activity in recent months
+                    // Create a pattern that reflects typical academic schedule
+                    // Higher activity during semesters, lower during breaks
                     let level;
-                    if (i < 100) { // Recent activity (last ~3 months)
-                        level = Math.floor(Math.random() * 3) + 2; // Levels 2-4
-                    } else if (i < 200) { // Medium activity
-                        level = Math.floor(Math.random() * 3) + 1; // Levels 1-3
-                    } else { // Lower activity
+                    
+                    // Recent months (last 3 months) - high activity
+                    if (i < 84) { // Last 12 weeks
+                        level = Math.floor(Math.random() * 2) + 2; // Levels 2-3
+                        // Add some high activity days
+                        if (Math.random() < 0.2) level = 4;
+                    } 
+                    // Middle period (3-6 months ago) - medium activity
+                    else if (i < 168) { 
+                        level = Math.floor(Math.random() * 2) + 1; // Levels 1-2
+                    } 
+                    // Older period (6+ months ago) - lower activity
+                    else { 
                         level = Math.floor(Math.random() * 2); // Levels 0-1
                     }
                     
-                    // Add some randomness
-                    if (Math.random() < 0.1) level = 0; // 10% chance of no activity
+                    // Add some randomness and empty days
+                    if (Math.random() < 0.3) level = 0; // 30% chance of no activity
                     
                     cell.className = `contribution-cell contribution-level-${level}`;
                     cell.title = `${level > 0 ? level * 2 : 0} contributions`;
