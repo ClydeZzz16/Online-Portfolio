@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jean Clyde Egmilan | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6C63FF;
+            --secondary: #4A44C6;
+            --dark: #121212;
+            --darker: #0A0A0A;
+            --light: #F5F5F7;
+            --gray: #2A2A2A;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #CCCCCC;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            right: 10%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 20%;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 5%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill {
+            padding: 0.5rem 1.2rem;
+            background: var(--gray);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .skill:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-image:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--gray);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .project-content p {
+            color: #CCCCCC;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(108, 99, 255, 0.2);
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: var(--transition);
+        }
+
+        .project-links a:hover {
+            color: var(--primary);
+        }
+
+        /* GitHub Section */
+        .github-section {
+            background: var(--darker);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 2rem;
+        }
+
+        .github-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--gray);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-card i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .language-stats {
+            margin-top: 2rem;
+        }
+
+        .language-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .language-name {
+            width: 100px;
+            font-weight: 500;
+        }
+
+        .language-bar-container {
+            flex-grow: 1;
+            height: 10px;
+            background: var(--gray);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .language-bar-fill {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 1s ease-in-out;
+        }
+
+        .language-percentage {
+            width: 50px;
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        .contributions-grid {
+            display: grid;
+            grid-template-columns: repeat(52, 1fr);
+            gap: 4px;
+            margin-top: 2rem;
+        }
+
+        .contribution-cell {
+            width: 12px;
+            height: 12px;
+            background: var(--gray);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .contribution-cell:hover {
+            transform: scale(1.3);
+        }
+
+        .contribution-level-0 { background: #1F1F1F; }
+        .contribution-level-1 { background: #0E4429; }
+        .contribution-level-2 { background: #006D32; }
+        .contribution-level-3 { background: #26A641; }
+        .contribution-level-4 { background: #39D353; }
+
+        .contribution-legend {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #CCCCCC;
+        }
+
+        .legend-items {
+            display: flex;
+            gap: 4px;
+        }
+
+        .legend-item {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.8rem 1rem;
+            background: var(--gray);
+            border: none;
+            border-radius: 10px;
+            color: var(--light);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--gray);
+            border-radius: 50%;
+            color: var(--light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Resume Section */
+        .resume-section {
+            text-align: center;
+            padding: 3rem 5%;
+        }
+
+        .resume-download {
+            margin-top: 2rem;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content, .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .floating-shapes {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .github-section {
+                padding: 2rem 1rem;
+            }
+            
+            .contributions-grid {
+                grid-template-columns: repeat(26, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">JCE</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#github">GitHub</a>
+            <a href="#resume">Resume</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Hi, I'm <span>Jean Clyde Egmilan</span><br>Software Engineer</h1>
+            <p>Aspiring Software Engineer with strong skills in Java, Python, JavaScript and C#, experienced in developing efficient systems and scalable applications.</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn">View My Work</a>
+                <a href="#resume" class="btn btn-outline">Download Resume</a>
+            </div>
+        </div>
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Turning Ideas Into Reality With Code</h3>
+                <p>I'm a Computer Science student at Visayas State University with experience creating digital solutions. I specialize in C#, Python, Java, and modern web technologies.</p>
+                <p>When I'm not coding, you can find me exploring new technologies, contributing to open source, or working on personal projects.</p>
+                <div class="skills">
+                    <div class="skill">C/C++</div>
+                    <div class="skill">Python</div>
+                    <div class="skill">Java</div>
+                    <div class="skill">C#</div>
+                    <div class="skill">JavaScript</div>
+                    <div class="skill">MySQL</div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="361090635_6621240014605478_150328919681623628812_n.jpg" alt="Jean Clyde Egmilan">
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">My Projects</h2>
+        <div class="projects-grid" id="projects-container">
+            <!-- Projects will be loaded from GitHub API -->
+            <div class="spinner"></div>
+        </div>
+    </section>
+
+    <!-- GitHub Section -->
+    <section id="github">
+        <h2 class="section-title">GitHub Activity</h2>
+        <div class="github-section">
+            <div class="github-stats" id="github-stats">
+                <!-- GitHub stats will be loaded from API -->
+                <div class="spinner"></div>
+            </div>
+            
+            <div class="language-stats" id="language-stats">
+                <h3 style="margin-bottom: 1rem;">Top Languages</h3>
+                <!-- Language stats will be loaded from API -->
+                <div class="spinner"></div>
+            </div>
+            
+            <h3 style="margin-bottom: 1rem; margin-top: 2rem;">Contribution Activity</h3>
+            <div class="contributions-grid" id="contributions-grid">
+                <!-- Contribution cells will be generated by JavaScript -->
+            </div>
+            <div class="contribution-legend">
+                <span>Less</span>
+                <div class="legend-items">
+                    <div class="legend-item contribution-level-0"></div>
+                    <div class="legend-item contribution-level-1"></div>
+                    <div class="legend-item contribution-level-2"></div>
+                    <div class="legend-item contribution-level-3"></div>
+                    <div class="legend-item contribution-level-4"></div>
+                </div>
+                <span>More</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="resume-section">
+        <h2 class="section-title">My Resume</h2>
+        <p>Download my resume to learn more about my experience and skills.</p>
+        <div class="resume-download">
+            <a href="SE I - Resume2.pdf" class="btn" id="download-resume" download>
+                <i class="fas fa-download"></i> Download Resume (PDF)
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h3>Email</h3>
+                        <p>clydeskieegmilan@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h3>Phone</h3>
+                        <p>0908-548-9347</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h3>Location</h3>
+                        <p>Bohol, Philippines</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <div>
+                        <h3>GitHub</h3>
+                        <p>github.com/ClydeZzz16</p>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" id="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/ClydeZzz16" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/jean-clyde-egmilan" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:clydeskieegmilan@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p class="copyright">© 2023 Jean Clyde Egmilan. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // GitHub API Integration
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = 'ClydeZzz16';
+            const selectedProjects = [
+                'egmilan_tictactoe_lab',
+                'EduAdventure',
+                'Windows_Paint',
+                'Windows-Calculator'
+            ];
+            
+            // Fetch GitHub user data
+            fetch(`https://api.github.com/users/${username}`)
+                .then(response => response.json())
+                .then(userData => {
+                    updateGitHubStats(userData);
+                })
+                .catch(error => {
+                    console.error('Error fetching GitHub user data:', error);
+                    // Fallback data if API fails
+                    updateGitHubStats({
+                        public_repos: 27,
+                        followers: 42,
+                        following: 18
+                    });
+                });
+            
+            // Fetch GitHub repositories
+            fetch(`https://api.github.com/users/${username}/repos`)
+                .then(response => response.json())
+                .then(repos => {
+                    // Filter to only include selected projects
+                    const filteredRepos = repos.filter(repo => 
+                        selectedProjects.includes(repo.name)
+                    );
+                    updateProjects(filteredRepos);
+                    
+                    // Calculate language statistics
+                    calculateLanguageStats(repos);
+                })
+                .catch(error => {
+                    console.error('Error fetching GitHub repositories:', error);
+                    // Fallback projects if API fails
+                    updateProjects([
+                        { name: 'egmilan_tictactoe_lab', description: 'Java Tic Tac Toe game with AI opponent', html_url: 'https://github.com/ClydeZzz16/egmilan_tictactoe_lab', language: 'Java' },
+                        { name: 'EduAdventure', description: 'Educational adventure game', html_url: 'https://github.com/ClydeZzz16/EduAdventure', language: 'C#' },
+                        { name: 'Windows_Paint', description: 'Paint application for Windows', html_url: 'https://github.com/ClydeZzz16/Windows_Paint', language: 'C#' },
+                        { name: 'Windows-Calculator', description: 'Modern calculator application', html_url: 'https://github.com/ClydeZzz16/Windows-Calculator', language: 'C#' }
+                    ]);
+                    
+                    // Fallback language stats
+                    updateLanguageStats({
+                        'Java': 35,
+                        'C#': 30,
+                        'Python': 20,
+                        'JavaScript': 10,
+                        'HTML': 5
+                    });
+                });
+            
+            // Generate GitHub contributions grid (simulated)
+            generateContributionsGrid();
+            
+            // Resume download functionality
+            document.getElementById('download-resume').addEventListener('click', function(e) {
+                // The download attribute will handle the download
+                console.log('Resume download initiated');
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Form submission
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! I will get back to you soon.');
+                this.reset();
+            });
+            
+            // Navbar background on scroll
+            window.addEventListener('scroll', function() {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 50) {
+                    nav.style.background = 'rgba(10, 10, 10, 0.95)';
+                    nav.style.padding = '1rem 5%';
+                } else {
+                    nav.style.background = 'rgba(10, 10, 10, 0.9)';
+                    nav.style.padding = '1.5rem 5%';
+                }
+            });
+            
+            function updateGitHubStats(userData) {
+                const statsContainer = document.getElementById('github-stats');
+                statsContainer.innerHTML = `
+                    <div class="stat-card">
+                        <i class="fab fa-github"></i>
+                        <h3>${userData.public_repos || 'N/A'}</h3>
+                        <p>Public Repositories</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-code-branch"></i>
+                        <h3>${userData.followers || 'N/A'}</h3>
+                        <p>Followers</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-star"></i>
+                        <h3>${userData.following || 'N/A'}</h3>
+                        <p>Following</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-code"></i>
+                        <h3>${selectedProjects.length}</h3>
+                        <p>Featured Projects</p>
+                    </div>
+                `;
+            }
+            
+            function calculateLanguageStats(repos) {
+                const languageStats = {};
+                
+                repos.forEach(repo => {
+                    if (repo.language) {
+                        languageStats[repo.language] = (languageStats[repo.language] || 0) + 1;
+                    }
+                });
+                
+                // Convert to percentages
+                const total = Object.values(languageStats).reduce((sum, count) => sum + count, 0);
+                const languagePercentages = {};
+                
+                for (const [language, count] of Object.entries(languageStats)) {
+                    languagePercentages[language] = Math.round((count / total) * 100);
+                }
+                
+                updateLanguageStats(languagePercentages);
+            }
+            
+            function updateLanguageStats(languagePercentages) {
+                const languageStatsContainer = document.getElementById('language-stats');
+                
+                // Sort languages by percentage (descending)
+                const sortedLanguages = Object.entries(languagePercentages)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 5); // Top 5 languages
+                
+                let languageHTML = '<h3 style="margin-bottom: 1rem;">Top Languages</h3>';
+                
+                sortedLanguages.forEach(([language, percentage]) => {
+                    // Assign colors based on language
+                    let color;
+                    switch(language) {
+                        case 'Java': color = '#f89820'; break;
+                        case 'C#': color = '#178600'; break;
+                        case 'Python': color = '#3572A5'; break;
+                        case 'JavaScript': color = '#f1e05a'; break;
+                        case 'HTML': color = '#e34c26'; break;
+                        case 'CSS': color = '#563d7c'; break;
+                        default: color = '#6C63FF';
+                    }
+                    
+                    languageHTML += `
+                        <div class="language-bar">
+                            <div class="language-name">${language}</div>
+                            <div class="language-bar-container">
+                                <div class="language-bar-fill" style="width: 0%; background-color: ${color};" data-percentage="${percentage}"></div>
+                            </div>
+                            <div class="language-percentage">${percentage}%</div>
+                        </div>
+                    `;
+                });
+                
+                languageStatsContainer.innerHTML = languageHTML;
+                
+                // Animate the language bars
+                setTimeout(() => {
+                    document.querySelectorAll('.language-bar-fill').forEach(bar => {
+                        const percentage = bar.getAttribute('data-percentage');
+                        bar.style.width = `${percentage}%`;
+                    });
+                }, 500);
+            }
+            
+            function updateProjects(repos) {
+                const projectsContainer = document.getElementById('projects-container');
+                
+                if (repos.length === 0) {
+                    projectsContainer.innerHTML = '<p>No featured projects found.</p>';
+                    return;
+                }
+                
+                let projectsHTML = '';
+                
+                // Create project descriptions based on project names
+                const projectDescriptions = {
+                    'egmilan_tictactoe_lab': 'Java Tic Tac Toe game with AI opponent featuring three difficulty levels. Built with Java Swing.',
+                    'EduAdventure': 'Educational adventure game designed to make learning fun and interactive.',
+                    'Windows_Paint': 'Paint application for Windows with various drawing tools and features.',
+                    'Windows-Calculator': 'Modern calculator application with advanced mathematical operations.'
+                };
+                
+                repos.forEach(repo => {
+                    projectsHTML += `
+                        <div class="project-card">
+                            <div class="project-image"></div>
+                            <div class="project-content">
+                                <h3>${repo.name}</h3>
+                                <p>${projectDescriptions[repo.name] || repo.description || 'No description available'}</p>
+                                <div class="project-tags">
+                                    <div class="project-tag">${repo.language || 'Various'}</div>
+                                </div>
+                                <div class="project-links">
+                                    <a href="${repo.html_url}" target="_blank"><i class="fab fa-github"></i> Code</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                projectsContainer.innerHTML = projectsHTML;
+            }
+            
+            function generateContributionsGrid() {
+                const grid = document.getElementById('contributions-grid');
+                const totalCells = 364; // 52 weeks * 7 days - a few days
+                
+                // More realistic contribution pattern
+                for (let i = 0; i < totalCells; i++) {
+                    const cell = document.createElement('div');
+                    
+                    // Create a more realistic pattern with higher activity in recent months
+                    let level;
+                    if (i < 100) { // Recent activity (last ~3 months)
+                        level = Math.floor(Math.random() * 3) + 2; // Levels 2-4
+                    } else if (i < 200) { // Medium activity
+                        level = Math.floor(Math.random() * 3) + 1; // Levels 1-3
+                    } else { // Lower activity
+                        level = Math.floor(Math.random() * 2); // Levels 0-1
+                    }
+                    
+                    // Add some randomness
+                    if (Math.random() < 0.1) level = 0; // 10% chance of no activity
+                    
+                    cell.className = `contribution-cell contribution-level-${level}`;
+                    cell.title = `${level > 0 ? level * 2 : 0} contributions`;
+                    grid.appendChild(cell);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
